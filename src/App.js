@@ -10,7 +10,12 @@ function App() {
 
       <Banner />
       {/* <h1>Netflix Originals</h1> */}
-      <Row title="Trending" fetchUrl={requests.fetchTrending} isLargeRow />
+      <Row
+        title="Netflix Originals"
+        fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow
+      />
+      <Row title="Trending" fetchUrl={requests.fetchTrending} />
       <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
       <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
       <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
