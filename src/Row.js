@@ -25,17 +25,27 @@ function Row({ title, fetchUrl, isLargeRow }) {
       autoplay: 1,
     },
   };
-
   const handleClick = (movie) => {
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
-      movieTrailer(movie?.name || "")
+      movieTrailer(
+        movie?.name ||
+          movie?.title ||
+          movie?.original_name ||
+          movie?.original_title
+      )
         .then((url) => {
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get("v"));
+          if (url) {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            setTrailerUrl(urlParams.get("v"));
+          } else {
+            // Handle the case where no trailer is found
+            setTrailerUrl("mHNSMjWqSHE");
+            // You can display a message, show a modal, etc.
+          }
         })
-        .catch((error) => console.error());
+        .catch((error) => console.error(error));
     }
   };
 
