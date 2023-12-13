@@ -1,5 +1,8 @@
 .row {
   margin-left: 20px;
+  object: container;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 
 .row_posters {
