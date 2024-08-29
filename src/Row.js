@@ -24,13 +24,13 @@ const handleClick = (movie) => {
     let newTrailerUrl;
 
     if (isLargeRow) {
-      newTrailerUrl = `https://vidsrc.to/embed/tv/${movieId}`;
+      newTrailerUrl = `https://vidsrc.cc/v2/embed/tv/${movieId}`;
     } else if (movie.media_type === "movie") {
-      newTrailerUrl = `https://vidsrc.to/embed/movie/${movieId}`;
+      newTrailerUrl = `https://vidsrc.cc/v2/embed/movie/${movieId}`;
     } else if (movie.media_type === "tv") {
-      newTrailerUrl = `https://vidsrc.to/embed/tv/${movieId}`;
+      newTrailerUrl = `https://vidsrc.cc/v2/embed/tv/${movieId}`;
     } else {
-      newTrailerUrl = `https://vidsrc.to/embed/movie/${movieId}`;
+      newTrailerUrl = `https://vidsrc.cc/v2/embed/movie/${movieId}`;
     }
 
     setTrailerUrl(newTrailerUrl);
