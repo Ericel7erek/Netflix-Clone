@@ -23,6 +23,9 @@
     width: 80px;
     object-fit: contain;
 }
+.nav_logo:hover {
+    cursor: pointer;
+}
 
 .nav_avatar {
     position: fixed;

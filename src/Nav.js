@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
   const [show, handleShow] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -24,6 +25,7 @@ function Nav() {
         className="nav_logo"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1597px-Netflix_2015_logo.svg.png?20190206123158"
         alt="Netflix Logo"
+        onClick={() => navigate("/")}
       />
       <img
         className="nav_avatar"
