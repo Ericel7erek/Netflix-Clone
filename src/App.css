@@ -1,8 +1,10 @@
 * {
-  margin: 0;
+  margin: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden !important
 }
-
 .App {
   background-color: #111;
-  color: white;
+  color: black;
 }

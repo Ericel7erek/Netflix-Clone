@@ -1,8 +1,9 @@
 .nav {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     height: 30px;
 
     display: flex;
@@ -11,7 +12,67 @@
     transition-timing-function: ease-in-out;
     z-index: 1;
 }
+.nav_search {
+    position: relative;
+    /* Changed from absolute to relative */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+}
 
+.nav_search input {
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.search_suggestions {
+    position: absolute;
+    /* Now relative to the nav_search */
+    background-color: white;
+    color: black;
+    width: 15%;
+    /* Adjusted to take the width of the input field */
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 76%;
+    /* Positions the suggestions directly below the input */
+    left: 0;
+    /* Aligns with the left of the input */
+    z-index: 999;
+    left: 50%;
+    /* Keeps it on top of other content */
+}
+
+
+.search_suggestions ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search_suggestions li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search_suggestions li:hover {
+    background-color: #f0f0f0;
+}
+.nav_search button {
+    padding: 8px 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 .nav_black {
     background-color: #111;
    

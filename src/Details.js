@@ -20,6 +20,7 @@ function Details() {
           const request = await axios.get(
             `/tv/${movieId}?api_key=${API_KEY}&language=en-US`
           );
+
           setMovie(request.data);
         } else {
           const request = await axios.get(
@@ -37,9 +38,9 @@ function Details() {
       let newTrailerUrl;
 
       if (isLargeRow) {
-        newTrailerUrl = `https://vidsrc.cc/v2/embed/tv/${movieId}`;
+        newTrailerUrl = `https://vidsrc.to/embed/tv/${movieId}`;
       } else {
-        newTrailerUrl = `https://vidsrc.cc/v2/embed/movie/${movieId}`;
+        newTrailerUrl = `https://vidsrc.to/embed/movie/${movieId}`;
       }
 
       setTrailerUrl(newTrailerUrl);
@@ -48,7 +49,14 @@ function Details() {
   }, [movieId]);
 
   return (
-    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black" }}>
+    <div
+      style={{
+        paddingTop: "100px",
+        height: "100vh",
+        width: "100vw",
+        backgroundColor: "black",
+      }}
+    >
       {movie ? (
         <div style={{ padding: "20px" }}>
           <h1>{movie.title || movie.name}</h1>

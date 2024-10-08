@@ -1,6 +1,6 @@
 .row {
   margin-left: 20px;
-  /* object: container; */
+  object-fit: container;
   margin-top: 20px;
   padding-top: 20px;
   
@@ -20,8 +20,8 @@
 
 .row_poster {
   object-fit: contain;
-  max-width: 100%;
-  max-height: 100px;
+  width: 100%;
+  min-height: 100px;
   margin-right: 10px;
   transition: transform 450ms;
   border: 1px solid transparent;
@@ -34,7 +34,7 @@
 }
 
 .row_posterLarge {
-  max-height: 250px;
+  height: 250px;
 }
 .row_posterLarge:hover {
   transform: (1.09);
