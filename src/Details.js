@@ -28,8 +28,8 @@ function Details() {
     // Update trailer URL based on type and id
     const newTrailerUrl =
       type === "tv"
-        ? `https://vidsrc.to/embed/tv/${id}`
-        : `https://vidsrc.to/embed/movie/${id}`;
+        ? `https://vidsrc.cc/v2/embed/tv/${id}`
+        : `https://vidsrc.cc/v2/embed/movie/${id}`;
     setTrailerUrl(newTrailerUrl);
 
     fetchMovieDetails();
