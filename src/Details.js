@@ -8,7 +8,8 @@ const API_KEY = process.env.REACT_APP_API_KEY; // Replace with your TMDB API key
 function Details() {
   const { state } = useLocation();
   const { type, id } = state;
-
+  const width = window.innerWidth
+    console.log(width);
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState("");
   useEffect(() => {
@@ -23,7 +24,6 @@ function Details() {
         console.error("Error fetching movie details:", error);
       }
     }
-
     // Update trailer URL based on type and id
     const newTrailerUrl =
       type === "tv"
@@ -34,9 +34,9 @@ function Details() {
     fetchMovieDetails();
   }, [id, type]); // 'trailerUrl' is not needed in the dependency array here
   return (
-    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black",padding: "20px"  }}>
+    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black"  }}>
       {movie ? (
-        <div>
+        <div style={{padding: "20px",paddingTop:"40px"}}>
           <h1>{movie.title || movie.name}</h1>
           <p>{movie.overview}</p>
 
@@ -44,7 +44,7 @@ function Details() {
             <iframe
               title="movie-trailer"
               width="100%"
-              height="390"
+              height={width<800?390:800}
               src={trailerUrl}
               frameBorder="0"
               allowFullScreen
@@ -52,7 +52,9 @@ function Details() {
           )}
         </div>
       ) : (
+        <div style={{padding: "20px",paddingTop:"40px"}}>
         <p>Loading...</p>
+        </div>
       )}
     </div>
 
