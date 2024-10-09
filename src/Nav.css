@@ -5,7 +5,8 @@
 }
 .nav_logo {
     width: 20px;
-    left: 0px;
+    left: 0px
+    ;
 }
 }
 
@@ -18,7 +19,9 @@
     height: 30px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    align-self: center;
     transition: all 0.45s;
     transition-timing-function: ease-in-out;
     z-index: 1;
@@ -27,9 +30,7 @@
     position: relative;
     /* Changed from absolute to relative */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    left: 45%;
+    /* left: 45%; */
 }
 
 .nav_search input {
@@ -57,7 +58,7 @@
     left: 0;
     /* Aligns with the left of the input */
     z-index: 999;
-    left: 45%;
+    /* left: 45%; */
     /* Keeps it on top of other content */
 }
 

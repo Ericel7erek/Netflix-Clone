@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
-import requests from "./requests";
 import "./Banner.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Banner({ fetchUrl }) {
   const [movie, setMovie] = useState([]);
+  const route = useLocation()
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +21,7 @@ function Banner({ fetchUrl }) {
       return request;
     }
     fetchData();
-  }, []);
+  }, [fetchUrl]);
 
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -41,6 +44,25 @@ function Banner({ fetchUrl }) {
         </h1>
 
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
+        <button className="banner_button"
+        onClick={()=>{
+                    route.pathname === "/Movies"
+                      ? navigate(`/Details/${movie.id}`, {
+                          state: {
+                            id: movie.id,
+                            type: "movie",
+                          },
+                        })
+                      : navigate(`/Details/${movie.id}`, {
+                          state: {
+                            id: movie.id,
+                            type: "tv",
+                          },
+                        });
+        }}
+        >
+          Play
+        </button>
       </div>
       <div className="banner--fadeBottom" />
     </header>

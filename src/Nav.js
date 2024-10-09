@@ -66,15 +66,15 @@ function Nav() {
     }, 500); // Add slight delay to avoid multiple rapid API calls
 
     return () => clearTimeout(delayDebounceFn); // Clear timeout on component unmount or term change
-  }, [searchTerm]);
+  }, [searchTerm,route.pathname]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate("/search", { state: { searchResults, searchTerm } });
-    }
-    setSearchTerm("");
-  };
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   if (searchTerm.trim()) {
+  //     navigate("/search", { state: { searchResults, searchTerm } });
+  //   }
+  //   setSearchTerm("");
+  // };
 
   return (
     <div className={`nav ${show && "nav_black"}`}>
@@ -111,7 +111,6 @@ function Nav() {
               <li
                 key={result.id}
                 onClick={() => {
-                  {
                     route.pathname === "/Movies"
                       ? navigate(`/Details/${result.id}`, {
                           state: {
@@ -125,7 +124,6 @@ function Nav() {
                             type: "tv",
                           },
                         });
-                  }
                   setSearchTerm("");
                 }}
               >

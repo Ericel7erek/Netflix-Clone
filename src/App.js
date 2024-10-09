@@ -7,13 +7,13 @@ import Nav from "./Nav";
 import Details from "./Details"; // Import Details component
 import Home from "./Home"; // Import Home component
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Router components
-import SearchResults from "./SearchResults";
+// import SearchResults from "./SearchResults";
 
 function App() {
   useEffect(() => {
     setTimeout(() => {
       window.stop();
-    }, 3000);
+    }, 10000);
   }, []);
   return (
     <Router>

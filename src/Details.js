@@ -11,7 +11,6 @@ function Details() {
 
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState("");
-  console.log(type, id);
   useEffect(() => {
     async function fetchMovieDetails() {
       try {
@@ -34,11 +33,10 @@ function Details() {
 
     fetchMovieDetails();
   }, [id, type]); // 'trailerUrl' is not needed in the dependency array here
-
   return (
-    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black" }}>
+    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black",padding: "20px"  }}>
       {movie ? (
-        <div style={{ padding: "20px" }}>
+        <div>
           <h1>{movie.title || movie.name}</h1>
           <p>{movie.overview}</p>
 
@@ -57,6 +55,7 @@ function Details() {
         <p>Loading...</p>
       )}
     </div>
+
   );
 }
 
