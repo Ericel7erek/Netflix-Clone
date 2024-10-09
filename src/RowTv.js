@@ -14,7 +14,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
       try {
         const request = await axios.get(fetchUrl);
         setMovies(request.data.results);
-        console.log(request);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -23,10 +22,14 @@ function Row({ title, fetchUrl, isLargeRow }) {
   }, [fetchUrl]);
 
   const handleClick = (movie) => {
-    // Navigate to the Details page with the movie ID
-    navigate(`/details/${movie.id}`, { state: { isLargeRow, movie } });
+    // Navigate to the Details screen with parameters
+    navigate(`/Details/${movie.id}`, {
+      state: {
+        id: movie.id,
+        type: "tv",
+      },
+    });
   };
-
   return (
     <div className="row">
       <h1>{title}</h1>

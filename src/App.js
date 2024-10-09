@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
-import Row from "./Row";
-import requests from "./requests";
+import RowMovies from "./RowMovies";
+import RowTv from "./RowTv";
+import { MovieRequests, TvRequests } from "./requests";
 import Banner from "./Banner";
 import Nav from "./Nav";
 import Details from "./Details"; // Import Details component
+import Home from "./Home"; // Import Home component
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Router components
 import SearchResults from "./SearchResults";
 
 function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      window.stop();
+    }, 3000);
+  }, []);
   return (
     <Router>
       <div className="App" style={{ backgroundColor: "black", color: "white" }}>
@@ -16,44 +23,84 @@ function App() {
         {/* Define routes */}
         <Routes>
           {/* Main page with movie rows */}
+          <Route path="/" element={<Home />} />
           <Route
-            path="/"
+            path="/Movies"
             element={
               <>
-                <Banner />
-                <Row
-                  title="Netflix Originals"
-                  fetchUrl={requests.fetchNetflixOriginals}
+                <Banner fetchUrl={MovieRequests.fetchTopRatedMovies} />
+                <RowMovies
+                  title="Trending"
+                  fetchUrl={MovieRequests.fetchTrending}
                   isLargeRow
                 />
-                <Row title="Trending" fetchUrl={requests.fetchTrending} />
-                <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-                <Row
+                <RowMovies
+                  title="Top Rated"
+                  fetchUrl={MovieRequests.fetchTopRatedMovies}
+                />
+                <RowMovies
                   title="Action Movies"
-                  fetchUrl={requests.fetchActionMovies}
+                  fetchUrl={MovieRequests.fetchActionMovies}
                 />
-                <Row
+                <RowMovies
                   title="Comedy Movies"
-                  fetchUrl={requests.fetchComedyMovies}
+                  fetchUrl={MovieRequests.fetchComedyMovies}
                 />
-                <Row
+                <RowMovies
                   title="Horror Movies"
-                  fetchUrl={requests.fetchHorrorMovies}
+                  fetchUrl={MovieRequests.fetchHorrorMovies}
                 />
-                <Row
+                <RowMovies
                   title="Romance Movies"
-                  fetchUrl={requests.fetchRomanceMovies}
+                  fetchUrl={MovieRequests.fetchRomanceMovies}
                 />
-                <Row
+                <RowMovies
                   title="Documentaries"
-                  fetchUrl={requests.fetchDocumentaries}
+                  fetchUrl={MovieRequests.fetchDocumentaries}
                 />
               </>
             }
           />
-          {/* Movie details route */}
+          <Route
+            path="/TvShows"
+            element={
+              <>
+                <Banner fetchUrl={TvRequests.fetchNetflixOriginals} />
+                <RowTv
+                  title="Top Rated Tv Shows"
+                  fetchUrl={TvRequests.fetchTopRatedTv}
+                  isLargeRow
+                />
+                <RowTv
+                  title="Popular Tv Shows"
+                  fetchUrl={TvRequests.fetchPopularTv}
+                />
+                <RowTv
+                  title="Netflix Originals"
+                  fetchUrl={TvRequests.fetchNetflixOriginals}
+                />
+                <RowTv
+                  title="Airing Today"
+                  fetchUrl={TvRequests.fetchAiringToday}
+                />
+                <RowTv title="On The Air" fetchUrl={TvRequests.fetchOnTheAir} />
+                <RowTv
+                  title="Trending Tv Shows"
+                  fetchUrl={TvRequests.fetchTrendingTv}
+                />
+                <RowTv
+                  title="Action & Adventure"
+                  fetchUrl={TvRequests.fetchActionTv}
+                />
+                <RowTv
+                  title="Sci-Fi & Fantasy"
+                  fetchUrl={TvRequests.fetchSciFiFantasy}
+                />
+              </>
+            }
+          />
           <Route path="/details/:movieId" element={<Details />} />
-          <Route path="/search" element={<SearchResults />} />
+          {/* <Route path="/search" element={<SearchResults />} /> */}
         </Routes>
       </div>
     </Router>

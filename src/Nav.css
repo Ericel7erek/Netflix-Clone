@@ -18,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 50%;
+    left: 45%;
 }
 
 .nav_search input {
@@ -46,7 +46,7 @@
     left: 0;
     /* Aligns with the left of the input */
     z-index: 999;
-    left: 50%;
+    left: 45%;
     /* Keeps it on top of other content */
 }
 

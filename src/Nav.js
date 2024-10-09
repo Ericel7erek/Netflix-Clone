@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "./axios"; // Import axios to make API requests
 
 function Nav() {
+  const route = useLocation();
+
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const [searchResults, setSearchResults] = useState([]); // State for search results
@@ -28,16 +30,29 @@ function Nav() {
     const fetchSearchResults = async () => {
       if (searchTerm.trim()) {
         try {
-          const response = await axios.get(`/search/movie`, {
-            params: {
-              api_key: process.env.REACT_APP_API_KEY,
-              query: searchTerm,
-              include_adult: false, // Keep this false if you want to exclude adult content
-              language: "en-US",
-              page: 1,
-            },
-          });
-          setSearchResults(response.data.results);
+          if (route.pathname === "/Movies") {
+            const response = await axios.get(`/search/movie`, {
+              params: {
+                api_key: process.env.REACT_APP_API_KEY,
+                query: searchTerm,
+                include_adult: false, // Keep this false if you want to exclude adult content
+                language: "en-US",
+                page: 1,
+              },
+            });
+            setSearchResults(response.data.results);
+          } else if (route.pathname === "/TvShows") {
+            const response = await axios.get(`/search/tv`, {
+              params: {
+                api_key: process.env.REACT_APP_API_KEY,
+                query: searchTerm,
+                include_adult: false, // Keep this false if you want to exclude adult content
+                language: "en-US",
+                page: 1,
+              },
+            });
+            setSearchResults(response.data.results);
+          }
         } catch (error) {
           console.error("Error fetching search results:", error);
         }
@@ -72,16 +87,22 @@ function Nav() {
 
       {/* Search Input */}
       {/* <form className="nav_search" onSubmit={handleSearch}> */}
-      <div className="nav_search">
-        <input
-          type="text"
-          placeholder="Search movies..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        {/* <button type="submit">Search</button>
+      {route.pathname === "/Movies" || route.pathname === "/TvShows" ? (
+        <div className="nav_search">
+          <input
+            type="text"
+            placeholder={
+              route.pathname === "/Movies"
+                ? "Search Movies..."
+                : "Search TV Shows..."
+            }
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {/* <button type="submit">Search</button>
       </form> */}
-      </div>
+        </div>
+      ) : null}
       {/* Display search results as user types */}
       {searchResults.length > 0 && (
         <div className="search_suggestions">
@@ -90,7 +111,21 @@ function Nav() {
               <li
                 key={result.id}
                 onClick={() => {
-                  navigate(`/details/${result.id}`);
+                  {
+                    route.pathname === "/Movies"
+                      ? navigate(`/Details/${result.id}`, {
+                          state: {
+                            id: result.id,
+                            type: "movie",
+                          },
+                        })
+                      : navigate(`/Details/${result.id}`, {
+                          state: {
+                            id: result.id,
+                            type: "tv",
+                          },
+                        });
+                  }
                   setSearchTerm("");
                 }}
               >

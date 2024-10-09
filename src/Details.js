@@ -1,62 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom"; // Get params from URL
+import { useLocation } from "react-router-dom"; // Get params from URL
 import axios from "./axios";
 import "./Details.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY; // Replace with your TMDB API key
 
 function Details() {
-  const { movieId } = useParams(); // Extract movieId from URL params
+  const { state } = useLocation();
+  const { type, id } = state;
+
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState("");
-  const location = useLocation();
-  const { isLargeRow, movie: initialMovie } = location.state || {};
-
+  console.log(type, id);
   useEffect(() => {
     async function fetchMovieDetails() {
-      // You can modify this request depending on whether the movieId is for a movie or TV show
       try {
-        if (isLargeRow) {
-          const request = await axios.get(
-            `/tv/${movieId}?api_key=${API_KEY}&language=en-US`
-          );
-
-          setMovie(request.data);
-        } else {
-          const request = await axios.get(
-            `/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-          );
-          setMovie(request.data);
-        }
+        const endpoint = type === "tv" ? `/tv/${id}` : `/movie/${id}`;
+        const request = await axios.get(
+          `${endpoint}?api_key=${API_KEY}&language=en-US`
+        );
+        setMovie(request.data);
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
     }
-    if (trailerUrl) {
-      setTrailerUrl("");
-    } else {
-      let newTrailerUrl;
 
-      if (isLargeRow) {
-        newTrailerUrl = `https://vidsrc.to/embed/tv/${movieId}`;
-      } else {
-        newTrailerUrl = `https://vidsrc.to/embed/movie/${movieId}`;
-      }
+    // Update trailer URL based on type and id
+    const newTrailerUrl =
+      type === "tv"
+        ? `https://vidsrc.to/embed/tv/${id}`
+        : `https://vidsrc.to/embed/movie/${id}`;
+    setTrailerUrl(newTrailerUrl);
 
-      setTrailerUrl(newTrailerUrl);
-    }
     fetchMovieDetails();
-  }, [movieId]);
+  }, [id, type]); // 'trailerUrl' is not needed in the dependency array here
 
   return (
-    <div
-      style={{
-        paddingTop: "100px",
-        height: "100vh",
-        width: "100vw",
-        backgroundColor: "black",
-      }}
-    >
+    <div style={{ height: "100vh", width: "100vw", backgroundColor: "black" }}>
       {movie ? (
         <div style={{ padding: "20px" }}>
           <h1>{movie.title || movie.name}</h1>

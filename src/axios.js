@@ -4,4 +4,9 @@ const instance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
 });
 
-export default instance;
+const anotherInstance = axios.create({
+  baseURL: "https://www.themoviedb.org",
+  // Add any other configuration options here
+});
+
+export { instance as default, anotherInstance };
