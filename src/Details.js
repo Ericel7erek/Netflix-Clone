@@ -44,7 +44,7 @@ function Details() {
             <iframe
               title="movie-trailer"
               width="100%"
-              height={width<800?390:800}
+              height={width<800?390:450}
               src={trailerUrl}
               frameBorder="0"
               allowFullScreen
